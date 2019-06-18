@@ -1,33 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import { connect } from "react-redux";
-import { simpleAction } from "./actions/simpleAction";
+import QuoteBox from "./components/quote-box";
 
-const mapStateToProps = state => ({
-  ...state
-});
-
-const mapDispatchToProps = dispatch => ({
-  submitSimpleAction: () => dispatch(simpleAction())
-});
-
-class App extends Component {
-  handleSimpleAction = event => {
-    this.props.submitSimpleAction();
-  };
-
+export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <pre>{JSON.stringify(this.props)}</pre>
-        <button onClick={this.handleSimpleAction}>Test action</button>
+        <QuoteBox />
       </div>
     );
   }
 }
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
