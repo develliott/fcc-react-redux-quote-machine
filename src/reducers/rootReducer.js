@@ -2,9 +2,9 @@
  src/reducers/rootReducer.js
 */
 
-import { combineReducers } from 'redux';
-import simpleReducer from './simpleReducer';
+import { combineReducers } from "redux";
+import quoteReducer from "./quoteReducer";
 
 export default combineReducers({
- simpleReducer
+  quoteReducer
 });

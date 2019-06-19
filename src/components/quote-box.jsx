@@ -1,45 +1,16 @@
 import React, { Component } from "react";
-import http from "../services/http";
+import { connect } from "react-redux";
 
-import _ from "lodash";
+import { FetchQuotes, UpdateQuote } from "../actions/quoteActions";
 
-export default class QuoteBox extends Component {
-  state = {
-    quotes: [],
-    quote: "",
-    author: "",
-    isFetching: false
-  };
-
+class QuoteBox extends Component {
   componentDidMount = async () => {
-    try {
-      this.setState({
-        isFetching: true
-      });
-
-      const response = await http.get(
-        "https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json"
-      );
-      const quotes = response.data.quotes;
-
-      this.setState({
-        quotes,
-        isFetching: false
-      });
-
-      this.populateRandomQuote();
-    } catch (e) {
-      console.log(e);
-      this.setState({
-        quotes: [],
-        isFetching: false
-      });
-    }
+    await this.props.FetchQuotes();
+    this.UpdateQuoteHelper();
   };
 
-  populateRandomQuote = () => {
-    const randomQuote = this.state.quotes[_.random(this.state.quotes.length)];
-    this.setState({ quote: randomQuote.quote, author: randomQuote.author });
+  UpdateQuoteHelper = () => {
+    this.props.UpdateQuote(this.props.quotes);
   };
 
   render() {
@@ -47,12 +18,12 @@ export default class QuoteBox extends Component {
       <div id="wrapper">
         <div id="quote-box">
           <div id="text">
-            {this.state.isFetching ? "Fetching quotes..." : ""}
-            <p>{this.state.quote}</p>
+            {this.props.isFetching ? "Fetching quotes..." : ""}
+            <p>{this.props.quote}</p>
           </div>
-          <div id="author">{this.state.author}</div>
-          <div id="new-quote" onClick={this.populateRandomQuote}>
-            <button>New Quote</button>
+          <div id="author">{this.props.author}</div>
+          <div id="new-quote">
+            <button onClick={this.UpdateQuoteHelper}>New Quote</button>
           </div>
           <a href="twitter.com/intent/tweet" id="tweet-quote">
             Tweet Quote
@@ -62,3 +33,21 @@ export default class QuoteBox extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  quotes: state.quoteReducer.quotes,
+  isFetching: state.quoteReducer.isFetching,
+  error: state.quoteReducer.error,
+  quote: state.quoteReducer.quote,
+  author: state.quoteReducer.author
+});
+
+const mapDispatchToProps = dispatch => ({
+  FetchQuotes: () => dispatch(FetchQuotes()),
+  UpdateQuote: quotes => dispatch(UpdateQuote(quotes))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(QuoteBox);
