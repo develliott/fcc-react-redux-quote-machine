@@ -2,7 +2,7 @@ This project was developed to refresh my React knowledge and implement Redux int
 
 # Information
 
-This project was firstly created by using the [create-react-app](https://www.npmjs.com/package/create-react-app) package. I created a simple application which fetched an array of quotes from a [gist endpoint](https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json) using the [Axios](https://www.npmjs.com/package/axios) package which I wrapped in a http service (at ./src/services/http.js). I rendered this data via a react component (at ./src/components/quote-box.jsx).
+This project was firstly created by using the [create-react-app](https://www.npmjs.com/package/create-react-app) package. I created a simple application which fetched an array of quotes from a [gist endpoint](https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json) using the [axios](https://www.npmjs.com/package/axios) package which I wrapped in a http service (at ./src/services/http.js). I rendered this data via a react component (at ./src/components/quote-box.jsx).
 
 I then installed [redux](https://www.npmjs.com/package/redux), [react-redux](https://www.npmjs.com/package/react-redux) and [redux-thunk](https://www.npmjs.com/package/redux-thunk) to take away the concern of maintaining state from react and instead into redux. This transition meant that react would now be just a view layer and thus only a representation of the redux state.
 

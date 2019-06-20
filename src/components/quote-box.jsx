@@ -22,8 +22,10 @@ class QuoteBox extends Component {
             <p>{this.props.quote}</p>
           </div>
           <div id="author">{this.props.author}</div>
-          <div id="new-quote">
-            <button onClick={this.UpdateQuoteHelper}>New Quote</button>
+          <div>
+            <button id="new-quote" onClick={this.UpdateQuoteHelper}>
+              New Quote
+            </button>
           </div>
           <a href="twitter.com/intent/tweet" id="tweet-quote">
             Tweet Quote
