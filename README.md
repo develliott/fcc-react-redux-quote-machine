@@ -8,7 +8,9 @@ I then installed [redux](https://www.npmjs.com/package/redux), [react-redux](htt
 
 This exercise helped my understanding of the redux store and how actions are dispatched succinctly.
 
-The only thing I'm unsure about is UpdateQuoteHelper() (in ./src/components/quote-box.jsx). In order to generate a random quote, I pass the entire array to UpdateQuote() (in ./src/actions/quoteActions.js). This enables me to use [lodash](https://www.npmjs.com/package/lodash) to generate a random index and consequently set a random quote. This approach removes the business logic concern from the react component which keeps it as a presentational layer. However, passing the entire array this way doesn't feel right and I'm not sure if I could get access to the array within the action an alternative way or if this pattern is correct.
+The only thing I'm unsure about is UpdateQuoteHelper() (in ./src/components/quote-box.jsx). In order to generate a random quote, I pass the entire array to UpdateQuote() (in ./src/actions/quoteActions.js). This enables me to use [lodash](https://www.npmjs.com/package/lodash) to generate a random index and consequently set a random quote. This approach removes the business logic concern from the react component which keeps it as a presentational layer. However, passing the entire array this way doesn't feel right and I'm not sure if I could get access to the array within the action an alternative way or if this pattern is correct\*.
+
+\*Update: I have since read an [Immutability Guide](https://daveceddia.com/react-redux-immutability-guide/) and have learnt that Javascript passes objects by reference and primitives by value. This means I am not passing the entire array, I am passing a pointer to the memory address of the object. My approach now seems more reasonable.
 
 As I continue these projects I know I will dig in and learn more and figure out better ways, but if you have the benefit of hindsight and free time I would greatly appreciate any advice or suggestions.
 
